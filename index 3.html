@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Revive Mobile Car Detailing — Conway, SC</title>
+<meta name="description" content="Premium mobile car detailing in Conway, SC. Exterior, interior, full details and ceramic coatings. We come to you.">
+<style>
+  :root{--bg:#0a0a0a;--panel:#101114;--gold:#d4af37;--text:#f4f4f4;--muted:#a9a9a9;--line:#1d1e22;--radius:14px}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+  a{color:var(--gold);text-decoration:none}
+  .wrap{max-width:1200px;margin:auto;padding:0 20px}
+
+  header{padding:24px 0;text-align:center}
+  header img{height:90px;width:auto;}
+  header h1{margin:14px 0 4px;font-size:34px;font-weight:900;letter-spacing:.04em}
+  header p{color:var(--muted);margin:0 0 10px}
+  .btn{display:inline-block;background:var(--gold);color:#0a0a0a;padding:10px 18px;border-radius:999px;font-weight:800;text-decoration:none}
+
+  .tabs-block{margin-top:36px}
+  .tabs-label{text-transform:uppercase;font-weight:900;letter-spacing:.08em;font-size:14px;margin-bottom:8px}
+  .tabs{display:flex;flex-wrap:wrap;gap:20px;border-bottom:2px solid var(--line);padding:6px 0}
+  .tab{background:none;border:none;color:#bdbdbd;font-weight:700;padding:12px 0;cursor:pointer;position:relative}
+  .tab.active{color:#fff}
+  .tab.active::after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:3px;background:var(--gold)}
+
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin-top:20px}
+  .kicker{display:inline-block;border:1px solid var(--gold);padding:4px 10px;border-radius:999px;color:var(--gold);font-weight:700;font-size:12px;letter-spacing:.05em}
+  h3{margin:10px 0 6px;font-size:22px;font-weight:700}
+  .price{font-size:30px;font-weight:900;color:var(--gold);margin-top:8px}
+  .note{color:var(--muted);margin:10px 0 0;font-size:14px}
+
+  .grid{display:grid;gap:20px;margin-top:18px}
+  .three{grid-template-columns:repeat(3,minmax(0,1fr))}
+  @media (max-width:800px){.three{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <img src="logo.png" alt="Revive Mobile Detailing Logo">
+  <h1>REVIVE MOBILE CAR DETAILING</h1>
+  <p>Conway, South Carolina — We Come To You</p>
+  <div class="cta">
+    <a class="btn" href="tel:+18432139543">Call (843) 213-9543</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="tabs-block">
+    <div class="tabs-label">Vehicle Size</div>
+    <div class="tabs" id="vehicleTabs">
+      <button class="tab" data-v="0">Sedan / Coupe</button>
+      <button class="tab" data-v="1">Small SUV / Small Truck</button>
+      <button class="tab" data-v="2">Large SUV / Truck</button>
+      <button class="tab" data-v="3">3rd Row / XL</button>
+    </div>
+  </div>
+
+  <div class="tabs-block">
+    <div class="tabs-label">Detailing Tier</div>
+    <div class="tabs" id="tierTabs">
+      <button class="tab" data-t="Tier 3">Basic</button>
+      <button class="tab" data-t="Tier 2">Standard</button>
+      <button class="tab" data-t="Tier 1">Premium</button>
+    </div>
+  </div>
+
+  <p class="note">Extra charge may apply for heavy pet hair, sand, or bio spills.</p>
+
+  <div class="grid three">
+    <div class="panel">
+      <span class="kicker">Exterior</span>
+      <h3>Revive Exterior</h3>
+      <div class="price" id="px-ex">$—</div>
+    </div>
+
+    <div class="panel">
+      <span class="kicker">Interior</span>
+      <h3>Revive Interior</h3>
+      <div class="price" id="px-in">$—</div>
+    </div>
+
+    <div class="panel">
+      <span class="kicker">Complete</span>
+      <h3>Full Revive</h3>
+      <div class="price" id="px-full">$—</div>
+    </div>
+  </div>
+
+  <div class="tabs-block" style="margin-top:40px">
+    <div class="tabs-label">Ceramic Coating</div>
+    <div class="tabs" id="cerTabs">
+      <button class="tab" data-cer="Tier 2">Tier 2</button>
+      <button class="tab" data-cer="Tier 1">Tier 1</button>
+    </div>
+  </div>
+
+  <div class="panel">
+    <span class="kicker">Ceramic</span>
+    <h3>Whole-Vehicle Protection</h3>
+    <div class="price" id="px-cer">$—</div>
+    <p class="note" id="cer-desc">Tier 2: Body paint only (includes Tier 1 exterior detail).</p>
+  </div>
+
+</main>
+
+<script>
+const P={
+ exterior:{"Tier 3":["$95","$105","$115","$130"],"Tier 2":["$120","$140","$160","$190"],"Tier 1":["$250","$280","$300","$350"]},
+ interior:{"Tier 3":["$90","$100","$115","$130"],"Tier 2":["$120","$140","$160","$200"],"Tier 1":["$180","$200","$220","$250"]},
+ full:{"Tier 3":["$160","$180","$210","$240"],"Tier 2":["$220","$250","$280","$320"],"Tier 1":["$390","$420","$480","$530"]},
+ ceramic:{"Tier 2":["$850","$990","$1150","$1300"],"Tier 1":["$990","$1150","$1290","$1490"]},
+ desc:{"Tier 2":"Tier 2: Body paint only (includes Tier 1 exterior detail).","Tier 1":"Tier 1: Full exterior system (paint, glass, lights, wheels, trims)."}
+};
+let v=0,t="Tier 3",c="Tier 2";
+function U(){
+ document.getElementById("px-ex").textContent=P.exterior[t][v];
+ document.getElementById("px-in").textContent=P.interior[t][v];
+ document.getElementById("px-full").textContent=P.full[t][v];
+ document.getElementById("px-cer").textContent=P.ceramic[c][v];
+ document.getElementById("cer-desc").textContent=P.desc[c];
+}
+document.querySelectorAll("#vehicleTabs .tab").forEach(b=>b.onclick=()=>{v=b.dataset.v;document.querySelectorAll("#vehicleTabs .tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");U();});
+document.querySelectorAll("#tierTabs .tab").forEach(b=>b.onclick=()=>{t=b.dataset.t;document.querySelectorAll("#tierTabs .tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");U();});
+document.querySelectorAll("#cerTabs .tab").forEach(b=>b.onclick=()=>{c=b.dataset.cer;document.querySelectorAll("#cerTabs .tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");U();});
+U();
+</script>
+
+</body>
+</html>
