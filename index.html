@@ -56,6 +56,7 @@
   .card.active{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
   .badge{display:inline-block;padding:4px 10px;border:2px solid var(--accent);border-radius:8px;color:var(--accent);font-weight:900;font-size:12px;letter-spacing:.05em;margin-bottom:6px}
   .price{font-size:22px;font-weight:900;color:var(--accent)}
+  .start{font-size:14px;color:var(--muted);font-weight:400;margin-right:4px}
   .note{color:var(--muted);font-size:14px}
   .summary-row{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:10px 0}
   .total{font-size:22px;color:var(--accent);font-weight:900}
@@ -74,7 +75,7 @@
     .wrap{padding:14px}
     header{grid-template-columns:1fr; gap:12px; text-align:center}
     header .brand{justify-content:center}
-    header img{height:84px}            /* balanced on small screens */
+    header img{height:84px}
     header h1{font-size:22px}
     header .tag{font-size:13px}
     .call{justify-self:center; width:100%; text-align:center; padding:12px}
@@ -91,7 +92,7 @@
     .dot{height:5px}
 
     label{font-size:13px; margin-bottom:4px}
-    input, select{font-size:16px; padding:12px; border-radius:10px} /* 16px avoids iOS zoom */
+    input, select{font-size:16px; padding:12px; border-radius:10px}
 
     .cards{grid-template-columns:1fr; gap:10px}
     .card{padding:14px; border-radius:12px}
@@ -203,18 +204,21 @@
               <div class="card" data-s="ex">
                 <div class="badge">Exterior Detail</div>
                 <div class="muted">Shine & protection outside</div>
-                <div class="price" id="pv-ex">$—</div>
+                <div class="price"><span class="start">From</span> <span id="pv-ex">$—</span> <span class="start">(Tier 3)</span></div>
               </div>
               <div class="card" data-s="in">
                 <div class="badge">Interior Detail</div>
                 <div class="muted">Deep clean & refresh inside</div>
-                <div class="price" id="pv-in">$—</div>
+                <div class="price"><span class="start">From</span> <span id="pv-in">$—</span> <span class="start">(Tier 3)</span></div>
               </div>
               <div class="card" data-s="full">
                 <div class="badge">Full Revive (Best Value)</div>
                 <div class="muted">Exterior + Interior—inside & out</div>
-                <div class="price" id="pv-full">$—</div>
+                <div class="price"><span class="start">From</span> <span id="pv-full">$—</span> <span class="start">(Tier 3)</span></div>
               </div>
+            </div>
+            <div class="note" style="margin-top:10px">
+              Amounts shown are <strong>starting prices for Tier 3</strong>. You’ll select your tier next—higher tiers include more and adjust the price.
             </div>
             <div class="actions">
               <button class="btn secondary" id="b3">← Back</button>
@@ -225,17 +229,18 @@
           <!-- Step 4: Tier -->
           <section class="step">
             <h2>Step 4 — Pick your tier</h2>
+            <div class="note" style="margin-bottom:10px">Tier selection updates pricing.</div>
             <div class="cards" id="tierCards">
               <div class="card" data-t="Tier 3">
-                <div class="badge">Basic</div>
+                <div class="badge">Tier 3</div>
                 <div class="muted">Great for maintenance</div>
               </div>
               <div class="card" data-t="Tier 2">
-                <div class="badge">Standard</div>
+                <div class="badge">Tier 2</div>
                 <div class="muted">Deep clean & gloss boost</div>
               </div>
               <div class="card" data-t="Tier 1">
-                <div class="badge">Premium</div>
+                <div class="badge">Tier 1</div>
                 <div class="muted">Like-new restoration</div>
               </div>
             </div>
@@ -266,7 +271,7 @@
             </div>
             <div class="panel" id="cerRow" style="display:none">
               <label><input type="checkbox" id="cerAdd" style="width:auto;margin-right:8px"> <strong id="cerLabel">Add Ceramic (+$—)</strong></label>
-              <div class="note">Available only with Premium Exterior or Full.</div>
+              <div class="note">Available only with Tier 1 Exterior or Full.</div>
             </div>
             <div class="actions">
               <button class="btn secondary" id="b5">← Back</button>
@@ -279,12 +284,12 @@
             <h2>Step 6 — Review & confirm</h2>
             <div id="summary"></div>
             <div class="summary-row"><span>Total</span><span class="total" id="total">$—</span></div>
+            <div class="note">Final pricing confirmed on arrival after quick inspection.</div>
             <div class="actions" style="justify-content:flex-start">
               <button class="btn secondary" id="b6">← Back</button>
               <a class="btn" id="textUs" href="#">Text request</a>
               <a class="btn secondary" href="tel:+18432139543">Call (843) 213-9543</a>
             </div>
-            <div class="note">We’ll text to confirm availability and your time window.</div>
           </section>
 
         </div>
@@ -369,7 +374,7 @@
   });
   $('#b2').onclick=()=> go(1);
   $('#n2').onclick=()=>{
-    // Preload service prices for cards (Tier 3 default)
+    // Preload service starting prices for Tier 3
     $('#pv-ex').textContent = PR.exterior["Tier 3"][vehicle];
     $('#pv-in').textContent = PR.interior["Tier 3"][vehicle];
     $('#pv-full').textContent= PR.full["Tier 3"][vehicle];
@@ -453,7 +458,7 @@
       ["Address", [addr,city,zip].filter(Boolean).join(", ")||"—"],
       ["Vehicle size", sizes[vehicle]],
       ["Service", serviceLabel],
-      ["Tier", tier.replace("Tier ","Tier ")],
+      ["Tier", tier],
       ["Base price", computeBase()]
     ];
     if($('#addonPet').checked) rows.push(["Add-on","Pet hair removal (quote)"]);
