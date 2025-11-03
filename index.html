@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Revive Mobile Car Detailing — Booking</title>
-<meta name="description" content="Book Revive Mobile Car Detailing in Conway, SC. Guided steps: contact, vehicle size, service, tier, add-ons, confirm.">
+<title>Revive Mobile Car Detailing — Book in Minutes</title>
+<meta name="description" content="Premium mobile car detailing in Conway, SC. We come to you with pro tools. Clear pricing, zero hassle. Book exterior, interior, or full detail in minutes.">
 <style>
   :root{
     --bg:#0b0c0e; --panel:#111216; --accent:#d4af37; --text:#f6f7f9; --muted:#9aa0a6; --line:#1c1e23;
@@ -13,14 +13,28 @@
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
   a{color:var(--accent);text-decoration:none}
-  .wrap{max-width:980px;margin:0 auto;padding:18px}
-  header{display:flex;align-items:center;gap:16px;justify-content:space-between;margin:10px 0 6px}
-  header .brand{display:flex;align-items:center;gap:12px}
-  header img{height:56px;width:auto;border-radius:6px}
-  header h1{font-size:20px;margin:0;font-weight:900;letter-spacing:.04em}
-  .call{background:var(--accent);color:#111;padding:10px 14px;border-radius:999px;font-weight:900}
+  .wrap{max-width:1100px;margin:0 auto;padding:18px}
+
+  /* HEADER (logo 2× size, logo left / text right) */
+  header{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;margin:16px 0 10px}
+  header .brand{display:flex;align-items:center;gap:14px}
+  header img{height:112px;width:auto;border-radius:8px} /* 2× previous 56px */
+  header h1{font-size:32px;margin:0;font-weight:900;letter-spacing:.04em}
+  header .tag{color:var(--muted);margin-top:4px}
+  .call{background:var(--accent);color:#111;padding:12px 18px;border-radius:999px;font-weight:900;white-space:nowrap}
+
+  /* Panels / cards */
   .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--edge-radius);padding:16px}
-  .muted{color:var(--muted)}
+
+  /* HERO */
+  .hero{margin-bottom:14px}
+  .hero .headline{font-size:26px;font-weight:900;margin:0 0 6px}
+  .hero .sub{color:var(--muted);margin:0 0 14px}
+  .hero .points{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .hero .point{background:#0f1115;border:1px solid #262a31;border-radius:10px;padding:12px}
+  @media (max-width:860px){.hero .points{grid-template-columns:1fr}}
+
+  /* Booking module */
   .title{font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#e9eaec;margin:2px 0 8px}
   .progress{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:6px 0 12px}
   .dot{height:6px;background:#2b2f36;border-radius:999px}
@@ -45,7 +59,8 @@
   .note{color:var(--muted);font-size:14px}
   .summary-row{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:10px 0}
   .total{font-size:22px;color:var(--accent);font-weight:900}
-  /* comparison table small spacing here (reused styles) */
+
+  /* Comparison table (Step 4) */
   .compare{margin-top:18px}
   .compare table{width:100%;border-collapse:separate;border-spacing:0;background:#0f1115;border:1px solid #262a31;border-radius:12px;overflow:hidden}
   .compare th,.compare td{padding:10px 12px;border-bottom:1px solid #1e2127;text-align:left}
@@ -57,19 +72,35 @@
 </head>
 <body>
   <div class="wrap">
+    <!-- HEADER -->
     <header class="panel">
       <div class="brand">
-        <img src="logo.png" alt="Revive logo">
+        <img src="logo.png" alt="Revive Mobile Detailing logo">
         <div>
           <h1>REVIVE MOBILE CAR DETAILING</h1>
-          <div class="muted">Conway, SC — We Come To You</div>
+          <div class="tag">Conway, SC — We come to you</div>
         </div>
       </div>
       <a class="call" href="tel:+18432139543">Call (843) 213-9543</a>
     </header>
 
+    <!-- HERO: friendly & clean copy -->
+    <section class="panel hero">
+      <div class="headline">Mobile detailing, done right—on your schedule.</div>
+      <div class="sub">We bring pro tools to your driveway. Clear pricing, quality results, zero hassle.</div>
+      <div class="points">
+        <div class="point"><strong>On-site convenience.</strong><br>No drop-offs or rides—home or office service while you keep your day moving.</div>
+        <div class="point"><strong>Time back in your day.</strong><br>Most visits wrap in a few hours. You relax; we handle the shine.</div>
+        <div class="point"><strong>Transparent & fair.</strong><br>Pick size → service → tier. Straightforward totals with no surprises.</div>
+      </div>
+      <p class="sub" style="margin-top:12px">
+        *We use your water & power when available. Serving Conway and nearby areas.
+      </p>
+    </section>
+
+    <!-- BOOKING -->
     <div class="panel">
-      <div class="title">Booking</div>
+      <div class="title">Book your detail</div>
       <div class="progress">
         <div class="dot active" id="p1"></div>
         <div class="dot" id="p2"></div>
@@ -86,22 +117,22 @@
           <section class="step">
             <h2>Step 1 — Your info</h2>
             <div class="grid two">
-              <div><label>Full Name</label><input id="name" placeholder="Jane Doe"></div>
+              <div><label>Full name</label><input id="name" placeholder="Jane Doe"></div>
               <div><label>Phone</label><input id="phone" placeholder="843-213-9543"></div>
-              <div><label>Street Address</label><input id="address" placeholder="123 Main St"></div>
+              <div><label>Street address</label><input id="address" placeholder="123 Main St"></div>
               <div><label>City</label><input id="city" placeholder="Conway"></div>
               <div><label>ZIP</label><input id="zip" placeholder="29526"></div>
-              <div><label>Notes</label><input id="notes" placeholder="Gate code, pets, etc."></div>
+              <div><label>Notes</label><input id="notes" placeholder="Gate code, pets, special requests"></div>
             </div>
             <div class="actions">
               <span></span>
-              <button class="btn" id="n1">Next: Vehicle Size →</button>
+              <button class="btn" id="n1">Next: Vehicle size →</button>
             </div>
           </section>
 
           <!-- Step 2: Vehicle Size -->
           <section class="step">
-            <h2>Step 2 — Choose your vehicle size</h2>
+            <h2>Step 2 — Pick your vehicle size</h2>
             <div class="cards" id="vehicleCards">
               <div class="card" data-v="0"><div class="badge">Sedan / Coupe</div><div>Camry, Civic, Altima</div></div>
               <div class="card" data-v="1"><div class="badge">Small SUV / Small Truck</div><div>CR-V, RAV4, Tacoma Access</div></div>
@@ -110,62 +141,61 @@
             </div>
             <div class="actions">
               <button class="btn secondary" id="b2">← Back</button>
-              <button class="btn" id="n2" disabled>Next: Pick Service →</button>
+              <button class="btn" id="n2" disabled>Next: Choose service →</button>
             </div>
           </section>
 
           <!-- Step 3: Service -->
           <section class="step">
-            <h2>Step 3 — What do you want done?</h2>
+            <h2>Step 3 — Choose your service</h2>
             <div class="cards" id="serviceCards">
               <div class="card" data-s="ex">
-                <div class="badge">Exterior</div>
-                <div class="muted">Wash, decon, protection</div>
+                <div class="badge">Exterior Detail</div>
+                <div class="muted">Shine & protection outside</div>
                 <div class="price" id="pv-ex">$—</div>
               </div>
               <div class="card" data-s="in">
-                <div class="badge">Interior</div>
-                <div class="muted">Vacuum, shampoo, deep clean</div>
+                <div class="badge">Interior Detail</div>
+                <div class="muted">Deep clean & refresh inside</div>
                 <div class="price" id="pv-in">$—</div>
               </div>
               <div class="card" data-s="full">
-                <div class="badge">Full Revive</div>
-                <div class="muted">Interior + Exterior</div>
+                <div class="badge">Full Revive (Best Value)</div>
+                <div class="muted">Exterior + Interior—inside & out</div>
                 <div class="price" id="pv-full">$—</div>
               </div>
             </div>
             <div class="actions">
               <button class="btn secondary" id="b3">← Back</button>
-              <button class="btn" id="n3" disabled>Next: Choose Tier →</button>
+              <button class="btn" id="n3" disabled>Next: Pick tier →</button>
             </div>
           </section>
 
           <!-- Step 4: Tier -->
           <section class="step">
-            <h2>Step 4 — Choose your tier</h2>
+            <h2>Step 4 — Pick your tier</h2>
             <div class="cards" id="tierCards">
               <div class="card" data-t="Tier 3">
                 <div class="badge">Basic</div>
-                <div class="muted">Maintenance clean</div>
+                <div class="muted">Great for maintenance</div>
               </div>
               <div class="card" data-t="Tier 2">
                 <div class="badge">Standard</div>
-                <div class="muted">Deep clean</div>
+                <div class="muted">Deep clean & gloss boost</div>
               </div>
               <div class="card" data-t="Tier 1">
                 <div class="badge">Premium</div>
-                <div class="muted">Like-new finish</div>
+                <div class="muted">Like-new restoration</div>
               </div>
             </div>
 
+            <!-- Comparison table auto-fills based on chosen service -->
             <div class="compare">
               <table>
                 <thead>
-                  <tr><th>Feature</th><th>Tier 3</th><th>Tier 2</th><th>Tier 1</th></tr>
+                  <tr><th>What’s included</th><th>Tier 3</th><th>Tier 2</th><th>Tier 1</th></tr>
                 </thead>
-                <tbody id="featureBody">
-                  <!-- filled by JS based on service -->
-                </tbody>
+                <tbody id="featureBody"></tbody>
               </table>
             </div>
 
@@ -189,21 +219,21 @@
             </div>
             <div class="actions">
               <button class="btn secondary" id="b5">← Back</button>
-              <button class="btn" id="n5">Review & Confirm →</button>
+              <button class="btn" id="n5">Review & confirm →</button>
             </div>
           </section>
 
           <!-- Step 6: Review -->
           <section class="step">
-            <h2>Step 6 — Review & Confirm</h2>
+            <h2>Step 6 — Review & confirm</h2>
             <div id="summary"></div>
             <div class="summary-row"><span>Total</span><span class="total" id="total">$—</span></div>
             <div class="actions" style="justify-content:flex-start">
               <button class="btn secondary" id="b6">← Back</button>
-              <a class="btn" id="textUs" href="#">Text Request</a>
+              <a class="btn" id="textUs" href="#">Text request</a>
               <a class="btn secondary" href="tel:+18432139543">Call (843) 213-9543</a>
             </div>
-            <div class="note">We’ll confirm availability and a time window by text or call.</div>
+            <div class="note">We’ll text to confirm availability and your time window.</div>
           </section>
 
         </div>
@@ -232,26 +262,30 @@
     ceramicT1: ["$890","$1,035","$1,160","$1,340"]
   };
 
-  // Feature lists (for comparison in Step 4)
+  // Features (Full = Exterior + Interior)
   const FEATURES = {
     ex: [
-      ["Hand wash & dry, wheels & tires, windows", true, true, true],
-      ["Bug & tar removal", true, true, true],
-      ["Clay & iron decontamination", false, true, true],
-      ["Light machine polish / gloss enhancement", false, true, true],
-      ["Sealant / paint protection", false, true, true],
-      ["Trim dressing & tire shine", false, true, true],
-      ["Engine bay detail", false, true, true],
-      ["Premium finish prep", false, false, true]
+      ["Foam bath", true, true, true],
+      ["Hand wash & dry", true, true, true],
+      ["Wheel & tire clean", true, true, true],
+      ["Door jambs", true, true, true],
+      ["Windows clean", true, true, true],
+      ["Tire dressing", true, true, true],
+      ["Paint sealant", true, true, true],
+      ["Clay bar & iron decontamination", false, true, true],
+      ["Trim restoration", false, true, true],
+      ["Hydrophobic sealant (paint & glass)", false, false, true],
+      ["One-step paint correction", false, false, true]
     ],
     in: [
-      ["Full vacuum (seats, carpets, trunk)", true, true, true],
-      ["Interior wipe-down & windows", true, true, true],
-      ["Crevice brushing & blowout", false, true, true],
-      ["Carpet & mat shampoo", false, true, true],
-      ["Leather/vinyl clean & condition", false, true, true],
-      ["Stain extraction / spot treatment", false, false, true],
-      ["Steam clean high-touch surfaces", false, false, true]
+      ["Vacuum all surfaces (seats, carpet, trunk)", true, true, true],
+      ["Wipe down (dash, console, doors)", true, true, true],
+      ["Windows cleaned", true, true, true],
+      ["Carpet & seat shampoo", false, true, true],
+      ["Vinyl & leather conditioning", false, true, true],
+      ["Deep clean of all surfaces", false, false, true],
+      ["Steam & wet extraction", false, false, true],
+      ["Conditioning of all surfaces", false, false, true]
     ]
   };
 
@@ -296,10 +330,20 @@
   });
   $('#b3').onclick=()=> go(2);
   $('#n3').onclick=()=>{
-    // build feature table based on service
-    const rows = (service==='in'?FEATURES.in:FEATURES.ex)
+    // Build feature table; Full = Exterior + Interior
+    let rows = "";
+    const makeRows = (list) => list
       .map(([label,t3,t2,t1])=>`<tr><td>${label}</td><td>${t3?'<span class="tick"></span>':'—'}</td><td>${t2?'<span class="tick"></span>':'—'}</td><td>${t1?'<span class="tick"></span>':'—'}</td></tr>`)
       .join('');
+    if (service === 'full') {
+      rows += `<tr><th colspan="4" style="background:#0e0f13;text-align:left">Exterior</th></tr>`;
+      rows += makeRows(FEATURES.ex);
+      rows += `<tr><th colspan="4" style="background:#0e0f13;text-align:left">Interior</th></tr>`;
+      rows += makeRows(FEATURES.in);
+    } else {
+      const list = (service === 'in') ? FEATURES.in : FEATURES.ex;
+      rows = makeRows(list);
+    }
     $('#featureBody').innerHTML = rows;
     go(4);
   };
@@ -312,7 +356,6 @@
   });
   $('#b4').onclick=()=> go(3);
   $('#n4').onclick=()=>{
-    // show/hide ceramic
     const showCer = (tier==="Tier 1") && (service==="ex" || service==="full");
     $('#cerRow').style.display = showCer ? '' : 'none';
     if(showCer){
@@ -346,7 +389,7 @@
   }
   function buildSummary(){
     const sizes=["Sedan / Coupe","Small SUV / Small Truck","Large SUV / Truck","3rd Row / XL"];
-    const serviceLabel = {ex:"Exterior", in:"Interior", full:"Full"}[service];
+    const serviceLabel = {ex:"Exterior Detail", in:"Interior Detail", full:"Full Revive"}[service];
     const name=$('#name').value.trim(), phone=$('#phone').value.trim();
     const addr=$('#address').value.trim(), city=$('#city').value.trim(), zip=$('#zip').value.trim();
     const notes=$('#notes').value.trim();
@@ -354,10 +397,10 @@
       ["Customer", name||"—"],
       ["Phone", phone||"—"],
       ["Address", [addr,city,zip].filter(Boolean).join(", ")||"—"],
-      ["Vehicle Size", sizes[vehicle]],
+      ["Vehicle size", sizes[vehicle]],
       ["Service", serviceLabel],
       ["Tier", tier.replace("Tier ","Tier ")],
-      ["Base Price", computeBase()]
+      ["Base price", computeBase()]
     ];
     if($('#addonPet').checked) rows.push(["Add-on","Pet hair removal (quote)"]);
     if($('#addonSand').checked) rows.push(["Add-on","Excessive sand (quote)"]);
